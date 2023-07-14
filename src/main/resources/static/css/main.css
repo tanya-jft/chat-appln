@@ -1,0 +1,240 @@
+:root{
+    --white: #F5F5F5FF;
+    --shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --msg-content: #393939;
+    --pearl-primary: #FBFCF8;
+    --color-chat-box: #f5f5f5;
+    --blue: rgba(138, 166, 191, 0.89);
+    --grey: #868fae;
+}
+
+
+body {
+    background-color: #f8f9fa;
+    background-color: whitesmoke;
+    font-family: aakar;
+}
+
+.chat-body {
+    margin-top: 5rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+/* sections */
+.section1, .section2{
+    overflow: auto;
+    height: 80vh;
+    padding: 0;
+    margin: 0;
+}
+
+.section1 {
+    overflow: hidden;
+    background-color: var(--pearl-primary);
+}
+
+/* section 1 -> users list */
+.users-header {
+    border-bottom: 1px solid white;
+    margin: 0px 0px 28px 0px;
+    background-color: var(--pearl-primary);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    padding-top: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
+.users-list {
+    overflow: auto;
+    height: 72vh;
+    padding: 2rem 0;
+    color: var(--msg-content);
+
+}
+
+.users-list-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 0rem 1rem;
+}
+
+.users-list-name button {
+    border: none;
+    background-color: transparent;
+    color: var(--msg-content);
+
+}
+
+.users-list h3 {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+}
+
+
+.section1 a {
+    color: antiquewhite;
+    text-transform: capitalize;
+}
+
+/* chat box */
+
+/* chat header */
+.chat-header {
+    padding-top: 2.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    background: var(--pearl-primary);
+    justify-content: space-between;
+    margin: 0;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+                /* message date time */
+
+.msg-box {
+    overflow: auto;
+    height: 64vh;
+}
+
+
+.msg-date-slot{
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.msg-date-slot > p{
+    text-align: center;
+    color: var(--msg-content);
+}
+
+.received-msg {
+    margin: 1rem 0;
+}
+
+.received-msg > .msg-content {
+    background: var(--blue);
+}
+
+.send-msg > .msg-content {
+    border-radius: 7px 0px 0px 13px;
+    background-color: var(--grey);
+
+}
+
+.send-msg {
+    margin: 1rem 0;
+}
+
+.time , .username{
+    padding: 0 ;
+    margin: 0 0.2rem 0 0.3rem;
+}
+
+.name-time {
+    padding: 0;
+}
+
+.msg-content{
+    width: fit-content;
+    max-width: 50%;
+    padding: 5px 27px;
+    border-radius: 0px 7px 13px 0px;
+    margin: 0;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+}
+
+.msg-date-slot > .msg {
+    width: auto;
+    color: var(--msg-content);
+}
+
+
+
+.chat-btn {
+    display: inline-block;
+    font-size: 15px;
+}
+
+.msg-sender-box {
+    height: 10%;
+    background-color: transparent;
+}
+
+
+.form1 {
+    height: 75%;
+    padding-top: 1.5rem;
+    margin: 0 1rem;
+}
+
+.form1 button {
+    border-radius: 1rem;
+    background-color: transparent;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: none;
+    color: black;
+    outline: none;
+}
+
+.form1 button:hover{
+    background-color: whitesmoke;
+    color: black;
+
+}
+
+.form1 input {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    border-bottom: 1px solid var(--msg-content);
+    border-radius: 0;
+    outline: none;
+    letter-spacing: 0.1rem;
+    font-size: 18px;
+}
+
+.form1 input::target-text {
+    color: var(--msg-content);
+}
+
+.form1 input::placeholder{
+    color: var(--msg-content);
+}
+
+.form1 input:focus{
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    border-bottom: 1px solid var(--msg-content);
+    color: var(--msg-content);
+}
+
+
+.main-container::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: #393939;
+}
+.main-container::-webkit-scrollbar-track{
+    background-color: #393939;
+    width: 0.5rem;
+}
+
+.main-container::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    height: 3rem;
+    background-color: #5f5f5f /* color of the scroll thumb */
+}
+
+/* home view */
+.home-view {
+    background-color: whitesmoke;
+}

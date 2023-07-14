@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymelead.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend list</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+</head>
+<body>
+<div class="container main-container">
+    <div class="row chat-body">
+<!--        users list -->
+        <div class="col-md-3 right section1 ">
+
+            <div class="col-md-12 chat-header">
+                <h4>UsersName</h4>
+            </div>
+
+            <div class="col-md-12 users-list  main-container">
+                <div>
+                    <div class="users-list-name">
+                        <h3>FIrst Last</h3>
+                        <button class="message-btn"><i class='fas fa-comment-dots'
+                                                       style='font-size:20px;'></i></button>
+                    </div>
+                    <div class="users-list-name">
+                        <h3>FIrst Last</h3>
+                        <button class="message-btn"><i class='fas fa-comment-dots'
+                                                       style='font-size:20px;'></i></button>
+                    </div>
+                    <div class="users-list-name">
+                        <h3>FIrst Last</h3>
+                        <button class="message-btn"><i class='fas fa-comment-dots'
+                                                       style='font-size:20px;'></i></button>
+                    </div>
+                    <div class="users-list-name">
+                        <h3>FIrst Last</h3>
+                        <button class="message-btn"><i class='fas fa-comment-dots'
+                                                       style='font-size:20px;'></i></button>
+                    </div>
+                    <div class="users-list-name">
+                        <h3>FIrst Last</h3>
+                        <button class="message-btn"><i class='fas fa-comment-dots'
+                                                       style='font-size:20px;'></i></button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- make notes on home page -->
+        <div class="col-md-9 right section2">
+
+            <div class="col-md-12 chat-header">
+                <h4>UserName</h4>
+                <p>Status</p>
+            </div>
+
+            <div class="col-md-12 msg-box  main-container">
+<!--                 date -->
+                <div class="msg-date-slot" >
+                    <p class="date" style="display: none">2023-07-12</p>
+                    <p class="notes">Make Notes</p>
+                </div>
+
+                <div class="col append-msg">
+                    <!--                 rcv msg -->
+                    <div class="d-flex align-items-start flex-column received-msg">
+                        <p class="msg-content">
+                            border-radius: 0px 7px 13px 0px;
+                            <i class="time">12:00</i>
+                        </p>
+                    </div>
+
+                    <!--                send msg -->
+                    <div class="d-flex align-items-end flex-column send-msg">
+                        <p class="msg-content">
+                            border-radius: 0px 7px 13px 0px;
+                            <i class="time">12:00</i>
+                        </p>
+                    </div>
+
+                    <!--                 rcv msg -->
+                    <div class="d-flex align-items-start flex-column received-msg">
+                        <p class="msg-content">
+                            border-radius: 0px 7px 13px 0px;
+                            <i class="time">12:00</i>
+                        </p>
+                    </div>
+                    <!--                send msg -->
+                    <div class="d-flex align-items-end flex-column send-msg">
+                        <p class="msg-content">
+                            border-radius: 0px 7px 13px 0px;
+                            <i class="time">12:00</i>
+                        </p>
+                    </div>
+                    <!--                send msg -->
+                    <div class="d-flex align-items-end flex-column send-msg">
+                        <p class="msg-content">
+                            border-radius: 0px 7px 13px 0px;
+                            <i class="time">12:00</i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+<!--            msg send box form -->
+            <div class="col-md-12 msg-sender-box">
+                <form class="form1 ">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="Type your message">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary">SEND</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/js/elements.js"></script>
+</body>
+</html>
