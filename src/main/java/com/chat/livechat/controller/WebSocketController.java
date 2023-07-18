@@ -5,6 +5,8 @@ import com.chat.livechat.repository.ChatRoomRepo;
 import com.chat.livechat.repository.MessageContainerRepo;
 import com.chat.livechat.repository.UserRepo;
 import com.chat.livechat.service.WebSocketService;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.Session;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +42,17 @@ public class WebSocketController {
         return webSocketService.loadPreviousMessage(roomId);
     }
 
+
     @MessageMapping("/send-to-broker/{roomId}/addUser")
     public void addUser(@DestinationVariable int roomId, @Payload ChatMessage message, Authentication auth) {
         Boolean val = webSocketService.saveMessage(roomId, message, auth);
         log.info("add user");
         messageSending.convertAndSend("/midway/" + roomId, message);
     }
+
+
+
+
 
 }
 
