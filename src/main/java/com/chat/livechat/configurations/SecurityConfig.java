@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,7 +31,9 @@ public class SecurityConfig {
                         .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.permitAll())
-                .authenticationProvider(authenticationProvider()).build();
+                .authenticationProvider(authenticationProvider())
+                .logout((logout)-> logout.logoutSuccessUrl("/login").permitAll())
+                .build();
     }
 
 

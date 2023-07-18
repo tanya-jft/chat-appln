@@ -13,15 +13,16 @@ function connect(displayName, username, id) {
     user = {"displayName": displayName, "username": username, "id": id};
 
     roomId = parseInt(user.id) + parseInt(loggedIn_id);
-
+    sessionStorage.setItem(`${user.id}`, `${user.username}`)
     var socket = new SockJS("/sock");
     stompClient = Stomp.over(socket);
     stompClient.connect(user, onConnected);
 }
 
+
 function onConnected(e) {
 
-    // var newSubs = stompClient.subscribe(`/live-chat/${roomId}`, allMessage)
+    stompClient.subscribe(`/live-chat/${roomId}`, allMessage)
     currentSubscription = stompClient.subscribe(`/midway/${roomId}`, onMessageRecieved)
 
     $(".chat-header").empty();
@@ -32,59 +33,31 @@ function onConnected(e) {
                 JSON.stringify({sender: loggedIn_name, message:"Join"}))*/
 }
 
+
 function allMessage(payload) {
-    //body = {date : [{message, sender, time, username}, {}, {}, {}], date: [{}, {}, {}].....}
-    var payloadBody = JSON.parse(payload.body);
-    var dateBox = $(".date");
-    var outerDateBox = $('.msg-date-slot');
-    var appendSendRcvMessage = $('.append-msg')
+    $(".msg-box").empty();
+    let entries = Object.entries(JSON.parse(payload.body));
+    let date = new Date();
 
+    entries.map(([key, values]) => {
+        $(".msg-box").append(`<div class="msg-date-slot" >
+                    <p class="date">${key}</p>
+                </div>`)
+        for (const i in values) {
+            const isLoggedIn = values[i].username === loggedIn_un;
+            const messageType = isLoggedIn ? 'send-msg' : 'received-msg';
+            const alignment = isLoggedIn ? 'end' : 'start';
 
-    var date = new Date().toJSON().slice(0, 10);
-    var entries = Object.entries(payloadBody);
-
-    entries.map(([key, valList]) => {
-        var dateKey = date === key ? "Today" : key
-        dateBox.text(dateKey).appendTo(outerDateBox)
-        for (const i in valList) {
-            if (valList[i].username === loggedIn_un) {
-                $(appendSendRcvMessage).append(`<div class="send-msg">
-                                        <p class="msg-content">
-                                        ${valList[i].message}
-                                        <i class="time">${valList[i].time}</i>
-                                        </p>
-                                    </div>`)
-            } else {
-                $(appendSendRcvMessage).append(`<div class="received-msg">
-                                        <p class="msg-content">
-                                        ${valList[i].message}
-                                        <i class="time">${valList[i].time}</i>
-                                        </p>
-                                    </div>`)
-                /*$(".received-msg").appendTo(appendSendRcvMessage).append(
-                    $("<p>").addClass("msg-content").text(valList[i].message),
-                    $("<i>").addClass("time").text(valList[i].time)
-                );*/
-            }
+            $(".msg-box").append(`
+            <div class="col append-msg">
+                <div class="d-flex align-items-${alignment} flex-column ${messageType}">
+                <p class="msg-content">${values[i].message} <i class="time">${values[i].time}</i> </p>
+                </div>
+            </div>`);
         }
     })
-    dateBox.text("Today").appendTo(outerDateBox);
-}
 
-function addMessage(sender, message) {
-    var ul = $("#chat-msg");
-    var li = $("<li>").addClass("media");
-    var img = $("<img>").addClass("mr-3 rounded-circle").attr("src", "profile.jpg").attr("alt", "Profile Image");
-    var div = $("<div>").addClass("media-body");
-    var h5 = $("<h5>").addClass("mt-0 mb-1").text(sender);
-    var p = $("<p>").text(message);
-    div.append(h5, p);
-    li.append(img, div);
-    ul.append(li);
-}
-
-function checkName(username, displayName) {
-    return username.toLowerCase() === loggedIn_un.toLowerCase() ? "You" : displayName;
+    scrollBottom();
 }
 
 
@@ -98,12 +71,14 @@ function onMessageRecieved(payload) {
     const messageType = isLoggedIn ? 'send-msg' : 'received-msg';
     const alignment = isLoggedIn ? 'end' : 'start';
 
-    $(".append-msg").append(`<div class="d-flex align-items-${alignment} flex-column ${messageType}">
-            <p class="msg-content">
-                ${payloadBody.message}
-                <i class="time">${currentTime.getHours()}:${currentTime.getMinutes()}</i>
-            </p>
-        </div>`);
+    $(".msg-box").append(`
+            <div class="col append-msg">
+                <div class="d-flex align-items-${alignment} flex-column ${messageType}">
+                <p class="msg-content">${payloadBody.message}
+                 <i class="time">${currentTime.getHours()}:${currentTime.getMinutes()}</i> </p>
+                </div>
+            </div>`);
+    scrollBottom();
 
     console.log(messageType);
 }
@@ -120,6 +95,7 @@ function sendMessage() {
         $("#msg").val('');
     }
     event.preventDefault();
+    scrollBottom();
 }
 
 
@@ -128,4 +104,12 @@ $("#msg-form").on("submit", function (event) {
     // event.preventDefault();
 });
 
+function scrollBottom(){
+    var messageBody = document.querySelector('.msg-box');
+    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+}
+// load the notes section when the page get ready
+$(document).ready(function () {
+
+});
 
