@@ -1,4 +1,4 @@
-:root{
+:root {
     --white: #F5F5F5FF;
     --shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     --msg-content: #393939;
@@ -25,7 +25,7 @@ body {
 }
 
 /* sections */
-.section1, .section2{
+.section1, .section2 {
     overflow: auto;
     height: 80vh;
     padding: 0;
@@ -77,6 +77,12 @@ body {
     padding: 1rem 0;
 }
 
+.users-list .online {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+}
 
 .section1 a {
     color: antiquewhite;
@@ -96,21 +102,22 @@ body {
     margin: 0;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
-                /* message date time */
+
+/* message date time */
 
 .msg-box {
     overflow-y: scroll;
-    overflow-x:hidden ;
+    overflow-x: hidden;
     height: 64vh;
 }
 
 
-.msg-date-slot{
+.msg-date-slot {
     padding: 1rem;
     margin: 1rem 0;
 }
 
-.msg-date-slot > p{
+.msg-date-slot > p {
     text-align: center;
     color: var(--msg-content);
 }
@@ -133,8 +140,8 @@ body {
     margin: 1rem 0;
 }
 
-.time , .username{
-    padding: 0 ;
+.time, .username {
+    padding: 0;
     margin: 0 0.2rem 0 0.3rem;
 }
 
@@ -142,7 +149,7 @@ body {
     padding: 0;
 }
 
-.msg-content{
+.msg-content {
     max-width: 50%;
     height: auto;
     padding: 5px 27px;
@@ -157,7 +164,6 @@ body {
     width: auto;
     color: var(--msg-content);
 }
-
 
 
 .chat-btn {
@@ -187,7 +193,7 @@ body {
     outline: none;
 }
 
-.form1 button:hover{
+.form1 button:hover {
     background-color: whitesmoke;
     color: black;
 
@@ -208,11 +214,11 @@ body {
     color: var(--msg-content);
 }
 
-.form1 input::placeholder{
+.form1 input::placeholder {
     color: var(--msg-content);
 }
 
-.form1 input:focus{
+.form1 input:focus {
     border: none;
     box-shadow: none;
     background: transparent;
@@ -225,12 +231,13 @@ body {
     width: 0.5rem;
     background-color: #393939;
 }
-.main-container::-webkit-scrollbar-track{
+
+.main-container::-webkit-scrollbar-track {
     background-color: #393939;
     width: 0.5rem;
 }
 
-.main-container::-webkit-scrollbar-thumb{
+.main-container::-webkit-scrollbar-thumb {
     border-radius: 10px;
     height: 3rem;
     background-color: #5f5f5f /* color of the scroll thumb */

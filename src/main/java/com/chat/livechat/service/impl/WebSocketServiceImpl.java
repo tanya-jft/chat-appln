@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +30,7 @@ public class WebSocketServiceImpl implements WebSocketService {
     public Boolean saveMessage(int roomId, ChatMessage message, Authentication auth) {
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         User user = userDetails.getUser();
+
 
         log.info("principal {}", user);
         int user_id = roomId - user.getId();

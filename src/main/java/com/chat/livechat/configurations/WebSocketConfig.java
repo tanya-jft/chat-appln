@@ -12,8 +12,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/sock").addInterceptors(new HttpHandShakeInterceptor())
-                .withSockJS();
+        registry.addEndpoint("/sock").withSockJS();
     }
 
     @Override

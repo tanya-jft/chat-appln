@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymelead.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymelead.org">
 <head>
     <meta charset="UTF-8">
     <title>Friend list</title>
-<!--bootstrap-->
+    <!--bootstrap-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -25,14 +25,27 @@
             </div>
 
             <div class="col-md-12 users-list  main-container">
-                <div th:each="user : ${users}" id="list">
-<!--                    <div th:if="!${user.getId() == #authentication.getPrincipal().getId()}" class="users-list-name" >-->
-                    <div class="users-list-name" >
+                <div th:each="user : ${activeUsers}">
+                    <div class="users-list-name">
                         <h3 th:text="${user.getId() == #authentication.getPrincipal().getId()} ? 'You(Myself)' : ${user.getDisplayName()}"></h3>
-                        <input type="hidden" th:value="${#authentication.getPrincipal().getId()}" id="logged-id" >
-                        <input type="hidden" th:value="${#authentication.getPrincipal().getUsername()}" id="logged-un" >
-                        <input type="hidden" th:value="${#authentication.getPrincipal().getDisplayName()}" id="logged-name" >
-                        <button th:data-name="${user}" th:onclick="connect([[${user.getDisplayName()}]], [[${user.getUsername()}]], [[${user.getId()}]])" class="message-btn">
+                        <button th:data-name="${user}"
+                                th:onclick="connect([[${user.getDisplayName()}]], [[${user.getUsername()}]], [[${user.getId()}]])"
+                                class="message-btn">
+                            <i class='fas fa-comment-dots' style='font-size:20px;color: green'></i>
+                        </button>
+                    </div>
+                </div>
+                <div th:each="user : ${users}" id="list">
+                    <!--                    <div th:if="!${user.getId() == #authentication.getPrincipal().getId()}" class="users-list-name" >-->
+                    <div class="users-list-name">
+                        <h3 th:text="${user.getId() == #authentication.getPrincipal().getId()} ? 'You(Myself)' : ${user.getDisplayName()}"></h3>
+                        <input type="hidden" th:value="${#authentication.getPrincipal().getId()}" id="logged-id">
+                        <input type="hidden" th:value="${#authentication.getPrincipal().getUsername()}" id="logged-un">
+                        <input type="hidden" th:value="${#authentication.getPrincipal().getDisplayName()}"
+                               id="logged-name">
+                        <button th:data-name="${user}"
+                                th:onclick="connect([[${user.getDisplayName()}]], [[${user.getUsername()}]], [[${user.getId()}]])"
+                                class="message-btn">
                             <i class='fas fa-comment-dots' style='font-size:20px;'></i>
                         </button>
                     </div>
@@ -50,26 +63,26 @@
 
             <div class="col-md-12 msg-box main-container">
                 <!-- date -->
-                <div class="msg-date-slot" >
+                <div class="msg-date-slot">
                     <p class="date">2023-07-12</p>
                     <p class="notes" style="display: none">Make Notes</p>
                 </div>
 
                 <div class="col append-msg">
                     <!--                 rcv msg -->
-<!--                    <div class="d-flex align-items-start flex-column received-msg">
-                        <p class="msg-content">
-                            hellooooooooooooo
-                            <i class="time">12:00</i>
-                        </p>
-                    </div>-->
+                    <!--                    <div class="d-flex align-items-start flex-column received-msg">
+                                            <p class="msg-content">
+                                                hellooooooooooooo
+                                                <i class="time">12:00</i>
+                                            </p>
+                                        </div>-->
                     <!-- send msg -->
-<!--                    <div class="d-flex align-items-end flex-column send-msg">
-                        <p class="msg-content">
-                            HEYYYY!!!
-                            <i class="time">12:00</i>
-                        </p>
-                    </div>-->
+                    <!--                    <div class="d-flex align-items-end flex-column send-msg">
+                                            <p class="msg-content">
+                                                HEYYYY!!!
+                                                <i class="time">12:00</i>
+                                            </p>
+                                        </div>-->
                 </div>
             </div>
 
@@ -90,8 +103,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
