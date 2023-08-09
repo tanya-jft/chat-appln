@@ -26,8 +26,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/login").permitAll().anyRequest().authenticated())
-                .formLogin(form -> form.permitAll()).authenticationProvider(authenticationProvider())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/css/**", "js/..", "/signup")
+                        .permitAll().anyRequest().authenticated())
+                .formLogin(form -> form.loginPage("/login").permitAll()).authenticationProvider(authenticationProvider())
                 .logout((logout) -> logout.logoutSuccessUrl("/login").permitAll() )
                 .sessionManagement(session -> session.maximumSessions(1).sessionRegistry(sessionRegistry))
                 .build();
