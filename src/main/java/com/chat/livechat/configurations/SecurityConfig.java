@@ -3,17 +3,15 @@ package com.chat.livechat.configurations;
 
 import com.chat.livechat.service.impl.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -21,16 +19,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private SessionRegistry sessionRegistry;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin(form -> form.permitAll())
-                .authenticationProvider(authenticationProvider()).build();
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/css/**", "js/..", "/signup")
+                        .permitAll().anyRequest().authenticated())
+                .formLogin(form -> form.loginPage("/login").permitAll()).authenticationProvider(authenticationProvider())
+                .logout((logout) -> logout.logoutSuccessUrl("/login").permitAll() )
+                .sessionManagement(session -> session.maximumSessions(1).sessionRegistry(sessionRegistry))
+                .build();
     }
 
 
@@ -51,12 +52,13 @@ public class SecurityConfig {
 
 
     @Bean
-    public CustomUserDetailsService detailsService(){
+    public CustomUserDetailsService detailsService() {
         return new CustomUserDetailsService();
     }
 
+
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider dao = new DaoAuthenticationProvider();
         dao.setUserDetailsService(detailsService());
         log.info("Dao Auth provider");
